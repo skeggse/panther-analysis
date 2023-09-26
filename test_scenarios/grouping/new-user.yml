@@ -1,0 +1,52 @@
+Format: jsonl
+LogType: Okta.SystemLog
+Logs:
+-
+  actor:
+    alternateId: jack.naglieri@runpanther.io
+    displayName: Jack Naglieri
+    id: 00uc1umudIxtsadWL356
+    type: User
+  authenticationContext:
+    authenticationStep: 0
+    externalSessionId: 102BXR6Q6VzTn2pR9KlpPcjdQ
+  client:
+    userAgent:
+      browser: CHROME
+      os: Mac OS X
+      rawUserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 9_5_1) Gecko/20130401 Firefox/58.4
+    geographicalContext:
+      geolocation:
+        lat: 40.730610
+        lon: -73.935242
+      city: New York
+      state: NY
+      country: US
+      postalCode: '10087'
+    zone: 'null'
+    ipAddress: 32.183.153.64
+    device: Computer
+  debugContext:
+    debugData:
+      requestId: YN8-SX82GN2R5pfBoGXrywAABg4
+      requestUri: /api/v1/users
+      url: /api/v1/users?activate=false
+  displayMessage: Create okta user
+  eventType: user.lifecycle.create
+  legacyEventType: core.user.config.user_creation.success
+  outcome:
+    result: SUCCESS
+  published: '2021-07-02T16:31:05.784Z'
+  securityContext: {}
+  severity: INFO
+  target:
+    - alternateId: sam.sheffield@panther.io
+      displayName: Sam Sheffield
+      id: 00uaf260zjOUVxvsn357
+      type: User
+  transaction:
+    detail: {}
+    id: YN8-SX82GN2R5pfBoGXrywAABg4
+    type: WEB
+  uuid: e6054be2-db52-11eb-bf04-0f9a403a57aa
+  version: '0'

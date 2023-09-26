@@ -6,6 +6,8 @@ import uuid
 from datetime import date, datetime, timezone
 from io import BytesIO
 from os import path
+from distutils.util import strtobool
+
 
 import boto3
 import yaml
@@ -36,9 +38,8 @@ def main(args):
     time_shift = args.panther_compromise_datetime - args.compromise_datetime
 
     logging.info(
-        "Loading file %s (%s) time shifted %s", args.file, data.get("LogType", ""), time_shift
+        "\n\n\tLoading file %s (%s) time shifted %s\n", args.file, data.get("LogType", ""), time_shift
     )
-
     process_file(
         time_shift,
         boto3.client("s3", region_name=args.region),
@@ -46,62 +47,64 @@ def main(args):
         data.get("Logs", []),
         data.get("LogType", ""),
         data.get("Format", "jsonl"),
+        test_name=args.test_name,
+        dry_run=args.dry_run,
     )
 
 
-def process_file(event_time_shift, client, bucket_name, logs, log_type, log_format):
+def process_file(event_time_shift, client, bucket_name, logs, log_type, log_format, test_name, dry_run):
     # these 2 are special
     if log_type == "AWS.CloudTrail":
-        process_cloudtrail(event_time_shift, client, bucket_name, logs, log_type)
+        process_cloudtrail(event_time_shift, client, bucket_name, logs, log_type, test_name, dry_run)
         return
     if log_type == "AWS.VPCFlow":
-        process_vpcflow(event_time_shift, client, bucket_name, logs, log_type)
+        process_vpcflow(event_time_shift, client, bucket_name, logs, log_type, test_name, dry_run)
         return
 
     # nothing special to do ...
     if log_format == "jsonl":
-        process_any_jsonl(event_time_shift, client, bucket_name, logs, log_type)
+        process_any_jsonl(event_time_shift, client, bucket_name, logs, log_type, test_name, dry_run)
         return
     if log_format == "raw":
-        process_any_raw(event_time_shift, client, bucket_name, logs, log_type)
+        process_any_raw(event_time_shift, client, bucket_name, logs, log_type, test_name, dry_run)
         return
 
     raise Exception("unknown log format: " + log_format)
 
 
-def process_cloudtrail(event_time_shift, client, bucket_name, logs, log_type):
-    logs = time_shift_json_logs(event_time_shift, logs, log_type)
+def process_cloudtrail(event_time_shift, client, bucket_name, logs, log_type, test_name, dry_run):
+    logs = time_shift_json_logs(event_time_shift, logs, log_type, dry_run)
     logging.info("Sending [%d] CloudTrail logs...", len(logs))
     # Wrap the CloudTrail in a 'Records' top-level key
-    resp = write_s3(client, bucket_name, {"Records": logs}, "json")
+    resp = write_s3(client, bucket_name, {"Records": logs}, "json", test_name, dry_run)
     logging.debug("Response: %s", resp["ResponseMetadata"]["HTTPStatusCode"])
 
 
 FLOW_LOG_HEADER = "version account-id interface-id srcaddr dstaddr srcport dstport protocol packets bytes start end action log-status"
 
 
-def process_vpcflow(event_time_shift, client, bucket_name, logs, log_type):
+def process_vpcflow(event_time_shift, client, bucket_name, logs, log_type, test_name, dry_run):
     logs = time_shift_vpcflow_logs(event_time_shift, logs, log_type)
     logging.info("Sending [%d] %s logs...", len(logs), log_type)
-    resp = write_s3(client, bucket_name, [FLOW_LOG_HEADER] + logs, "raw")
+    resp = write_s3(client, bucket_name, [FLOW_LOG_HEADER] + logs, "raw", test_name, dry_run)
     logging.debug("Response: %s", resp["ResponseMetadata"]["HTTPStatusCode"])
 
 
-def process_any_jsonl(event_time_shift, client, bucket_name, logs, log_type):
-    logs = time_shift_json_logs(event_time_shift, logs, log_type)
+def process_any_jsonl(event_time_shift, client, bucket_name, logs, log_type, test_name, dry_run):
+    logs = time_shift_json_logs(event_time_shift, logs, log_type, dry_run)
     logging.info("Sending [%d] %s logs...", len(logs), log_type)
-    resp = write_s3(client, bucket_name, logs, "jsonl")
+    resp = write_s3(client, bucket_name, logs, "jsonl", test_name, dry_run)
     logging.debug("Response: %s", resp["ResponseMetadata"]["HTTPStatusCode"])
 
 
-def process_any_raw(event_time_shift, client, bucket_name, logs, log_type):
+def process_any_raw(event_time_shift, client, bucket_name, logs, log_type, test_name, dry_run):
     logs = time_shift_raw_logs(event_time_shift, logs, log_type)
     logging.info("Sending [%d] %s logs...", len(logs), log_type)
-    resp = write_s3(client, bucket_name, logs, "raw")
+    resp = write_s3(client, bucket_name, logs, "raw", test_name, dry_run)
     logging.debug("Response: %s", resp["ResponseMetadata"]["HTTPStatusCode"])
 
 
-def write_s3(client, bucket_name, logs, format):
+def write_s3(client, bucket_name, logs, format, test_name, dry_run):
     if format == "raw":
         data = "\n".join(logs)
     elif format == "json":
@@ -115,23 +118,36 @@ def write_s3(client, bucket_name, logs, format):
     writer.write(data.encode("utf-8"))
     writer.close()
     data_stream.seek(0)
+    if dry_run:
+        return {
+            "ResponseMetadata": {
+                "HTTPStatusCode": {
+                    200
+                }
+            }
+        }
     return client.put_object(
-        Bucket=bucket_name, ContentType="gzip", Body=data_stream, Key=str(uuid.uuid4()) + ".gz"
+        Bucket=bucket_name, ContentType="gzip", Body=data_stream, Key=test_name+"/"+str(uuid.uuid4()) + ".gz"
     )
 
 
-def time_shift_json_logs(event_time_shift, logs, log_type):
+def time_shift_json_logs(event_time_shift, logs, log_type, dry_run):
     shifted_logs = []
 
     event_time = get_event_time(log_type)
     event_time_attrs = event_time["attrs"]
     event_time_format = event_time["format"]
 
+    if dry_run:
+        print('\n')
     for log in logs:
         if len(event_time_attrs) == 1:
-            log_event_time = datetime.strptime(log[event_time_attrs[0]], event_time_format).replace(
-                tzinfo=timezone.utc
-            )
+            if event_time_format == 'unixms':
+                log_event_time = datetime.fromtimestamp(log[event_time_attrs[0]] / 1000, tz=timezone.utc)
+            else:
+                log_event_time = datetime.strptime(log[event_time_attrs[0]], event_time_format).replace(
+                    tzinfo=timezone.utc
+                )
         elif len(event_time_attrs) == 2:
             log_event_time = datetime.strptime(
                 log[event_time_attrs[0]][event_time_attrs[1]], event_time_format
@@ -140,14 +156,22 @@ def time_shift_json_logs(event_time_shift, logs, log_type):
         log_event_time += event_time_shift
 
         if len(event_time_attrs) == 1:
-            log[event_time_attrs[0]] = log_event_time.strftime(event_time_format)
+            if event_time_format == 'unixms':
+                log[event_time_attrs[0]] = int(log_event_time.timestamp() * 1000)
+                if dry_run:
+                    print(f"    p_event_time {log_event_time.strftime('%Y-%m-%d %H:%M:%S %Z')}")
+            else:
+                log[event_time_attrs[0]] = log_event_time.strftime(event_time_format)
+                if dry_run:
+                    print(f"    p_event_time {log[event_time_attrs[0]]}")
         if len(event_time_attrs) == 2:
             log[event_time_attrs[0]][event_time_attrs[1]] = log_event_time.strftime(
                 event_time_format
             )
 
         shifted_logs.append(log)
-
+    if dry_run:
+        print('\n')
     return shifted_logs
 
 
@@ -201,8 +225,12 @@ def get_event_time(log_type):
         return {"attrs": ["published"], "format": "%Y-%m-%dT%H:%M:%S.%fZ"}
     if log_type == "AWS.S3ServerAccess":  # [03/Nov/2020:04:43:07 +0000]
         return {"index": 2, "format": "[%d/%b/%Y:%H:%M:%S"}
-    if log_type == 'Slack.AccessLogs': # 2021-06-12 21:30:47.000Z
+    if log_type == 'Slack.AccessLogs':  # 2021-06-12 21:30:47.000Z
         return {'attrs': ['date_first'], 'format': '%Y-%m-%d %H:%M:%S.%fZ'}
+    if log_type == 'GitHub.Audit':  # 2021-06-12 21:30:47.000Z
+        return {'attrs': ['created_at'], 'format': 'unixms'}
+    if log_type == 'Crowdstrike.DetectionSummary':  # 2021-10-01 00:00:00.000Z
+        return {'attrs': ['timestamp'], 'format': '%Y-%m-%dT%H:%M:%SZ'}
     raise Exception("unknown logType: " + log_type)
 
 
@@ -214,6 +242,12 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--region", help="the region of the S3 Bucket of the Panther source", required=True
+    )
+    parser.add_argument(
+        "--test_name", help="the name of the test", required=True
+    )
+    parser.add_argument(
+        "--dry_run", help="log out", default=False, type=lambda x:bool(strtobool(x)), required=False,
     )
     parser.add_argument(
         "--compromise-datetime",
@@ -235,3 +269,4 @@ if __name__ == "__main__":
         datefmt="%Y-%m-%d %H:%M:%S",
     )
     main(args)
+

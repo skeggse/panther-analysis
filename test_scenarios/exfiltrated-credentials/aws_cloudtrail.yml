@@ -1,0 +1,246 @@
+---
+LogType: AWS.CloudTrail
+Format: jsonl
+Logs:
+  - eventVersion: '1.05'
+    userIdentity:
+      type: AssumedRole
+      principalId: '123456789012:WebServerRole'
+      arn: arn:aws:sts::123456789012:assumed-role/WebServerRole
+      accountId: '123456789012'
+      accessKeyId: '1'
+      sessionContext:
+        attributes:
+          mfaAuthenticated: 'true'
+          creationDate: '2023-09-19T21:15:23Z'
+        sessionIssuer:
+          type: Role
+          principalId: '123456789012'
+          arn: arn:aws:iam::123456789012:role/WebServerRole
+          accountId: '123456789012'
+          userName: WebServerRole
+    eventTime: '2023-09-19T21:15:23Z'
+    eventSource: iam.amazonaws.com
+    eventName: CreateAccessKey
+    awsRegion: us-east-1
+    sourceIPAddress: 111.111.111.111
+    userAgent: console.amazonaws.com
+    requestParameters:
+      policyName: policy
+      groupName: group
+    responseElements:
+    requestID: '1'
+    eventID: '1'
+    eventType: AwsApiCall
+    recipientAccountId: '123456789012'
+  - eventVersion: '1.05'
+    userIdentity:
+      type: AssumedRole
+      principalId: '123456789012:DatabaseRole'
+      arn: arn:aws:sts::123456789012:assumed-role/DatabaseRole
+      accountId: '123456789012'
+      accessKeyId: '2'
+      sessionContext:
+        attributes:
+          mfaAuthenticated: 'false'
+          creationDate: '2023-09-19T21:30:45Z'
+        sessionIssuer:
+          type: Role
+          principalId: '123456789012'
+          arn: arn:aws:iam::123456789012:role/DatabaseRole
+          accountId: '123456789012'
+          userName: DatabaseRole
+    eventTime: '2023-09-19T21:30:45Z'
+    eventSource: iam.amazonaws.com
+    eventName: DeleteAccessKey
+    awsRegion: us-east-1
+    sourceIPAddress: 111.111.111.111
+    userAgent: console.amazonaws.com
+    requestParameters:
+      userName: user1
+      accessKeyId: key1
+    responseElements:
+    requestID: '2'
+    eventID: '2'
+    eventType: AwsApiCall
+    recipientAccountId: '123456789012'
+  - eventVersion: '1.05'
+    userIdentity:
+      type: AssumedRole
+      principalId: '123456789012:EC2Role'
+      arn: arn:aws:sts::123456789012:assumed-role/EC2Role
+      accountId: '123456789012'
+      accessKeyId: '3'
+      sessionContext:
+        attributes:
+          mfaAuthenticated: 'true'
+          creationDate: '2023-09-19T21:45:30Z'
+        sessionIssuer:
+          type: Role
+          principalId: '123456789012'
+          arn: arn:aws:iam::123456789012:role/EC2Role
+          accountId: '123456789012'
+          userName: EC2Role
+    eventTime: '2023-09-19T21:45:30Z'
+    eventSource: ec2.amazonaws.com
+    eventName: RunInstances
+    awsRegion: us-west-2
+    sourceIPAddress: 222.222.222.222
+    userAgent: aws-cli/2.3.4 Python/3.8.8 Linux/5.4.0-1055-aws exe/x86_64.ubuntu.20 prompt/off
+    requestParameters:
+      imageId: ami-0123456789abcdef0
+      instanceType: t2.micro
+    responseElements:
+      instancesSet:
+        items:
+          - instanceId: i-0123456789abcdef01
+      reservationId: r-0123456789abcdef0
+    requestID: '3'
+    eventID: '3'
+    eventType: AwsApiCall
+    recipientAccountId: '123456789012'
+  - eventVersion: '1.05'
+    userIdentity:
+      type: AssumedRole
+      principalId: '123456789012:DeploymentUpdateGitHubRole'
+      arn: arn:aws:sts::123456789012:assumed-role/DeploymentUpdateGitHubRole
+      accountId: '123456789012'
+      accessKeyId: '1'
+      sessionContext:
+        attributes:
+          mfaAuthenticated: 'false'
+          creationDate: '2023-09-21T13:55:35Z'
+        sessionIssuer:
+          type: Role
+          principalId: '123456789012'
+          arn: arn:aws:iam::123456789012:role/DeploymentUpdateGitHubRole
+          accountId: '123456789012'
+          userName: DeploymentUpdateGitHubRole
+    eventTime: '2023-09-21T13:55:35Z' # 2 minutes after 13:53:10
+    eventSource: s3.amazonaws.com
+    eventName: StartSession
+    awsRegion: us-west-1
+    sourceIPAddress: 333.333.333.333
+    userAgent: aws-cli/2.3.4 Python/3.8.8 Linux/5.4.0-1055-aws exe/x86_64.ubuntu.20 prompt/off
+    requestParameters: {}
+    responseElements: {}
+    requestID: '1'
+    eventID: '1'
+    eventType: AwsApiCall
+    recipientAccountId: '123456789012'
+  - eventVersion: '1.05'
+    userIdentity:
+      type: AssumedRole
+      principalId: '123456789012:DeploymentUpdateGitHubRole'
+      arn: arn:aws:sts::123456789012:assumed-role/DeploymentUpdateGitHubRole
+      accountId: '123456789012'
+      accessKeyId: '2'
+      sessionContext:
+        attributes:
+          mfaAuthenticated: 'false'
+          creationDate: '2023-09-21T13:55:40Z'
+        sessionIssuer:
+          type: Role
+          principalId: '123456789012'
+          arn: arn:aws:iam::123456789012:role/DeploymentUpdateGitHubRole
+          accountId: '123456789012'
+          userName: DeploymentUpdateGitHubRole
+    eventTime: '2023-09-21T13:55:40Z'
+    eventSource: s3.amazonaws.com
+    eventName: ListResources
+    awsRegion: us-west-1
+    sourceIPAddress: 333.333.333.333
+    userAgent: aws-cli/2.3.4 Python/3.8.8 Linux/5.4.0-1055-aws exe/x86_64.ubuntu.20 prompt/off
+    requestParameters: {}
+    responseElements: {}
+    requestID: '2'
+    eventID: '2'
+    eventType: AwsApiCall
+    recipientAccountId: '123456789012'
+  - eventVersion: '1.05'
+    userIdentity:
+      type: AssumedRole
+      principalId: '123456789012:DeploymentUpdateGitHubRole'
+      arn: arn:aws:sts::123456789012:assumed-role/DeploymentUpdateGitHubRole
+      accountId: '123456789012'
+      accessKeyId: '3'
+      sessionContext:
+        attributes:
+          mfaAuthenticated: 'false'
+          creationDate: '2023-09-21T13:56:12Z'
+        sessionIssuer:
+          type: Role
+          principalId: '123456789012'
+          arn: arn:aws:iam::123456789012:role/DeploymentUpdateGitHubRole
+          accountId: '123456789012'
+          userName: DeploymentUpdateGitHubRole
+    eventTime: '2023-09-21T13:56:12Z'
+    eventSource: s3.amazonaws.com
+    eventName: UpdateResource
+    awsRegion: us-west-1
+    sourceIPAddress: 333.333.333.333
+    userAgent: aws-cli/2.3.4 Python/3.8.8 Linux/5.4.0-1055-aws exe/x86_64.ubuntu.20 prompt/off
+    requestParameters: {}
+    responseElements: {}
+    requestID: '3'
+    eventID: '3'
+    eventType: AwsApiCall
+    recipientAccountId: '123456789012'
+  - eventVersion: '1.05'
+    userIdentity:
+      type: AssumedRole
+      principalId: '123456789012:DeploymentUpdateGitHubRole'
+      arn: arn:aws:sts::123456789012:assumed-role/DeploymentUpdateGitHubRole
+      accountId: '123456789012'
+      accessKeyId: '3'
+      sessionContext:
+        attributes:
+          mfaAuthenticated: 'false'
+          creationDate: '2023-09-21T13:56:37Z'
+        sessionIssuer:
+          type: Role
+          principalId: '123456789012'
+          arn: arn:aws:iam::123456789012:role/DeploymentUpdateGitHubRole
+          accountId: '123456789012'
+          userName: DeploymentUpdateGitHubRole
+    eventTime: '2023-09-21T13:56:37Z'
+    eventSource: s3.amazonaws.com
+    eventName: DescribeResource
+    awsRegion: us-west-1
+    sourceIPAddress: 333.333.333.333
+    userAgent: aws-cli/2.3.4 Python/3..8 Linux/5.4.0-1055-aws exe/x86_64.ubuntu.20 prompt/off
+    requestParameters: { }
+    responseElements: { }
+    requestID: '3'
+    eventID: '3'
+    eventType: AwsApiCall
+    recipientAccountId: '123456789012'
+  - eventVersion: '1.05'
+    userIdentity:
+      type: AssumedRole
+      principalId: '123456789012:DeploymentUpdateGitHubRole'
+      arn: arn:aws:sts::123456789012:assumed-role/DeploymentUpdateGitHubRole
+      accountId: '123456789012'
+      accessKeyId: '3'
+      sessionContext:
+        attributes:
+          mfaAuthenticated: 'false'
+          creationDate: '2023-09-21T13:56:52Z'
+        sessionIssuer:
+          type: Role
+          principalId: '123456789012'
+          arn: arn:aws:iam::123456789012:role/DeploymentUpdateGitHubRole
+          accountId: '123456789012'
+          userName: DeploymentUpdateGitHubRole
+    eventTime: '2023-09-21T13:56:52Z'
+    eventSource: s3.amazonaws.com
+    eventName: WriteLog
+    awsRegion: us-west-1
+    sourceIPAddress: 333.333.333.333
+    userAgent: aws-cli/2.3.4 Python/3..8 Linux/5.4.0-1055-aws exe/x86_64.ubuntu.20 prompt/off
+    requestParameters: { }
+    responseElements: { }
+    requestID: '3'
+    eventID: '3'
+    eventType: AwsApiCall
+    recipientAccountId: '123456789012'

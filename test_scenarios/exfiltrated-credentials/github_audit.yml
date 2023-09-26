@@ -1,0 +1,304 @@
+---
+LogType: GitHub.Audit
+Format: jsonl
+Logs:
+  -
+    _document_id: zKk767S8Iks4tQPVvIhZ
+    workflow_id: "9416547"
+    workflow_run_id: "887307046"
+    action: git.push
+    actor: sesheffield
+    created_at: 1695253990320
+    actor_location:
+      country_code: US
+    org: panther-labs
+    repo: panther-labs/example-repo
+    completed_at: "2023-09-20T23:53:10.320Z"
+    '@timestamp': 1695253990320
+    name: CI
+    event: push
+    started_at: "2023-09-20T23:53:10Z"
+    head_sha: pmwK6Wn0XZCVluLAma6uAkZ6FUGW47nzBp4Smd0B
+    head_branch: main
+    conclusion: success
+    trigger_id: "7219010284"
+  -
+    _document_id: lyNOxxUOefTt2EzWPdqR
+    workflow_id: "9416547"
+    workflow_run_id: "887307046"
+    action: pull_request_review
+    actor: sesheffield
+    created_at: 1695257590320
+    actor_location:
+      country_code: US
+    org: panther-labs
+    repo: panther-labs/example-repo
+    completed_at: "2023-09-21T00:53:10.320Z"
+    '@timestamp': 1695257590320
+    name: CI
+    event: push
+    started_at: "2023-09-21T00:53:10Z"
+    head_sha: JXe1if75mC3BoRCCDTjPeToB4DpMGKOd7iHXbsIN
+    head_branch: main
+    conclusion: success
+    trigger_id: "7219010284"
+  -
+    _document_id: YusEA0mLz4ONbwbXBtB2
+    workflow_id: "9416547"
+    workflow_run_id: "887307046"
+    action: pull_request_review_comment.create
+    actor: zbrown
+    created_at: 1695261190320
+    actor_location:
+      country_code: US
+    org: panther-labs
+    repo: panther-labs/example-repo
+    completed_at: "2023-09-21T01:53:10.320Z"
+    '@timestamp': 1695261190320
+    name: CI
+    event: push
+    started_at: "2023-09-21T01:53:10Z"
+    head_sha: mCdoZ1PtXBIpzHXqc3farrpB7QbsxLpVWSrErSvx
+    head_branch: main
+    conclusion: success
+    trigger_id: "7219010284"
+  -
+    _document_id: ZeoyYP6LtrCBv5nKmSEE
+    workflow_id: "9416547"
+    workflow_run_id: "887307046"
+    action: pull_request_review_comment.update
+    actor: zbrown
+    created_at: 1695264790320
+    actor_location:
+      country_code: US
+    org: panther-labs
+    repo: panther-labs/example-repo
+    completed_at: "2023-09-21T02:53:10.320Z"
+    '@timestamp': 1695264790320
+    name: CI
+    event: push
+    started_at: "2023-09-21T02:53:10Z"
+    head_sha: m2h8cWAPzyTA79CSVJE8srkqEWRMHC0KNySTSlut
+    head_branch: main
+    conclusion: success
+    trigger_id: "7219010284"
+  -
+    _document_id: YmtR6QAbNhpVblVbGwbp
+    workflow_id: "9416547"
+    workflow_run_id: "887307046"
+    action: pull_request_review_comment.create
+    actor: sesheffield
+    created_at: 1695268390320
+    actor_location:
+      country_code: US
+    org: panther-labs
+    repo: panther-labs/example-repo
+    completed_at: "2023-09-21T03:53:10.320Z"
+    '@timestamp': 1695268390320
+    name: CI
+    event: push
+    started_at: "2023-09-21T03:53:10Z"
+    head_sha: 3LbOw4NsDwHHyQ5CGonzTqFsDrlOraAKlLWkmVPF
+    head_branch: main
+    conclusion: success
+    trigger_id: "7219010284"
+  -
+    _document_id: OGEHFABJH9c6qLumqcFm
+    workflow_id: "9416547"
+    workflow_run_id: "887307046"
+    action: pull_request_review_comment.delete
+    actor: sesheffield
+    created_at: 1695271990320
+    actor_location:
+      country_code: US
+    org: panther-labs
+    repo: panther-labs/example-repo
+    completed_at: "2023-09-21T04:53:10.320Z"
+    '@timestamp': 1695271990320
+    name: CI
+    event: push
+    started_at: "2023-09-21T04:53:10Z"
+    head_sha: haXtoLsLxcG4maHRmi3utW664z0grHTwbgrrMlnJ
+    head_branch: main
+    conclusion: success
+    trigger_id: "7219010284"
+  -
+    _document_id: 0yhEwzj2rHMoxsuhVj8r
+    workflow_id: "9416547"
+    workflow_run_id: "887307046"
+    action: pull_request_review_comment.create
+    actor: dbrooks
+    created_at: 1695275590320
+    actor_location:
+      country_code: US
+    org: panther-labs
+    repo: panther-labs/example-repo
+    completed_at: "2023-09-21T05:53:10.320Z"
+    '@timestamp': 1695275590320
+    name: CI
+    event: push
+    started_at: "2023-09-21T05:53:10Z"
+    head_sha: 29njQyJtLNsdaV07dU3tnWeZQjJ86uAniF4m0atv
+    head_branch: main
+    conclusion: success
+    trigger_id: "7219010284"
+  -
+    _document_id: nuRIBtQiHKKwwmTF4l1l
+    workflow_id: "9416547"
+    workflow_run_id: "887307046"
+    action: pull_request_review_comment.create
+    actor: zbrown
+    created_at: 1695279190320
+    actor_location:
+      country_code: US
+    org: panther-labs
+    repo: panther-labs/example-repo
+    completed_at: "2023-09-21T06:53:10.320Z"
+    '@timestamp': 1695279190320
+    name: CI
+    event: push
+    started_at: "2023-09-21T06:53:10Z"
+    head_sha: Pi0hk8y1yiHXzlmXJX6ZlO0XssSmQGe4NvuhDPOD
+    head_branch: main
+    conclusion: success
+    trigger_id: "7219010284"
+  -
+    _document_id: Lay6wyceRC4iwY0VUdHg
+    workflow_id: "9416547"
+    workflow_run_id: "887307046"
+    action: pull_request_review_comment.create
+    actor: dbrooks
+    created_at: 1695282790320
+    actor_location:
+      country_code: US
+    org: panther-labs
+    repo: panther-labs/example-repo
+    completed_at: "2023-09-21T07:53:10.320Z"
+    '@timestamp': 1695282790320
+    name: CI
+    event: push
+    started_at: "2023-09-21T07:53:10Z"
+    head_sha: psc0wpR93q8gMULmkjachtOqQq7npPJKYmfAxW8x
+    head_branch: main
+    conclusion: success
+    trigger_id: "7219010284"
+  -
+    _document_id: dzjnjG5uhCUhYtUtzzci
+    workflow_id: "9416547"
+    workflow_run_id: "887307046"
+    action: pull_request_review_comment.update
+    actor: zbrown
+    created_at: 1695286390320
+    actor_location:
+      country_code: US
+    org: panther-labs
+    repo: panther-labs/example-repo
+    completed_at: "2023-09-21T08:53:10.320Z"
+    '@timestamp': 1695286390320
+    name: CI
+    event: push
+    started_at: "2023-09-21T08:53:10Z"
+    head_sha: MFe1UXql3VmrezWq3OgWOPJ7wkw9qwJH3GAyqQe7
+    head_branch: main
+    conclusion: success
+    trigger_id: "7219010284"
+  -
+    _document_id: WlKRn7HVnZDQYtEtjrLS
+    workflow_id: "9416547"
+    workflow_run_id: "887307046"
+    action: pull_request_review.submit
+    actor: zbrown
+    created_at: 1695289990320
+    actor_location:
+      country_code: US
+    org: panther-labs
+    repo: panther-labs/example-repo
+    completed_at: "2023-09-21T09:53:10.320Z"
+    '@timestamp': 1695289990320
+    name: CI
+    event: push
+    started_at: "2023-09-21T09:53:10Z"
+    head_sha: C3dWIpH7sD6Ln7O2EASjYmu1rXRG2KtExuy6nRcF
+    head_branch: main
+    conclusion: success
+    trigger_id: "7219010284"
+  -
+    _document_id: I0yIa4isqQ6txA6EWzG4
+    workflow_id: "9416547"
+    workflow_run_id: "887307046"
+    action: pull_request_review.submit
+    actor: dbrooks
+    created_at: 1695293590320
+    actor_location:
+      country_code: US
+    org: panther-labs
+    repo: panther-labs/example-repo
+    completed_at: "2023-09-21T10:53:10.320Z"
+    '@timestamp': 1695293590320
+    name: CI
+    event: push
+    started_at: "2023-09-21T10:53:10Z"
+    head_sha: szzNPp7F8TKD8ZweRV2SW5qCJ2goLNYhfsMlKVzK
+    head_branch: main
+    conclusion: success
+    trigger_id: "7219010284"
+  -
+    _document_id: xZu9JPqgW75EOCNatX6e
+    workflow_id: "9416547"
+    workflow_run_id: "887307046"
+    action: pull_request_review.dismiss
+    actor: dbrooks
+    created_at: 1695297190320
+    actor_location:
+      country_code: US
+    org: panther-labs
+    repo: panther-labs/example-repo
+    completed_at: "2023-09-21T11:53:10.320Z"
+    '@timestamp': 1695297190320
+    name: CI
+    event: push
+    started_at: "2023-09-21T11:53:10Z"
+    head_sha: JaytjlcCWreKua8MTOEGm2cJQiDr4QelTUJmW24J
+    head_branch: main
+    conclusion: success
+    trigger_id: "7219010284"
+  -
+    _document_id: HS0RmuYBYE91CWviLswN
+    workflow_id: "9416547"
+    workflow_run_id: "887307046"
+    action: pull_request_review.delete
+    actor: sesheffield
+    created_at: 1695300790320
+    actor_location:
+      country_code: US
+    org: panther-labs
+    repo: panther-labs/example-repo
+    completed_at: "2023-09-21T12:53:10.320Z"
+    '@timestamp': 1695300790320
+    name: CI
+    event: push
+    started_at: "2023-09-21T12:53:10Z"
+    head_sha: AKSPlFpae3crcKGvJoHdN0PQrhueqw9ZmU83A4Ux
+    head_branch: main
+    conclusion: success
+    trigger_id: "7219010284"
+  -
+    _document_id: aoocDCCxw9VGRCs9FrMg
+    workflow_id: "9416547"
+    workflow_run_id: "887307046"
+    action: pull_request.merge
+    actor: sesheffield
+    created_at: 1695304390320
+    actor_location:
+      country_code: US
+    org: panther-labs
+    repo: panther-labs/example-repo
+    completed_at: "2023-09-21T13:53:10.320Z"
+    '@timestamp': 1695304390320
+    name: CI
+    event: push
+    started_at: "2023-09-21T13:53:10Z"
+    head_sha: 2qdvS6t9Hn1SZyhltT9wQYjP0tpuT3pFl9cBLIAB
+    head_branch: main
+    conclusion: success
+    trigger_id: "7219010284"

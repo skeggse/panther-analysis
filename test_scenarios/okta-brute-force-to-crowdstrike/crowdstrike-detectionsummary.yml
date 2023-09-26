@@ -1,0 +1,73 @@
+---
+LogType: Crowdstrike.DetectionSummary
+Format: jsonl
+Logs:
+  -
+    CommandLine: "/Applications/app.app/Contents/MacOS/pup app"
+    PatternDispositionValue: 2176
+    UserName: Jack Naglieri
+    timestamp: '2021-06-26T21:27:45Z'
+    ParentImageFileName: "/usr/libexec/runningboardd"
+    ParentProcessId: 376330001421757630
+    cid: '11111111111111111111111111111111'
+    MACAddress: aa-00-00-00-00-00
+    SensorId: '00000000000000000000000000000000'
+    SeverityName: Low
+    MD5String: '33333333333333333333333333333333'
+    ParentCommandLine: "/usr/libexec/runningboardd"
+    EventType: Event_ExternalApiEvent
+    DetectName: NGAV
+    Nonce: 1
+    Tactic: Malware
+    eid: 118
+    ProcessEndTime: '1695237011'
+    CustomerIdString: '11111111111111111111111111111111'
+    Objective: Falcon Detection Method
+    FilePath: "/Applications/app.app/Contents/MacOS/"
+    DetectDescription: This file is classified as Adware/PUP based on its SHA256 hash.
+    MachineDomain: ''
+    ComputerName: macbook
+    GrandparentCommandLine: "/sbin/launchd"
+    PatternDispositionDescription: Prevention/Quarantine, process was blocked from execution
+      and quarantine was attempted.
+    GrandparentImageFileName: "/sbin/launchd"
+    UTCTimestamp: '1616609989000'
+    FileName: pup app
+    AgentIdString: '00000000000000000000000000000000'
+    SHA256String: '3333333333333333333333333333333333333333333333333333333333333333'
+    LocalIP: 194.88.246.242
+    SHA1String: '0000000000000000000000000000000000000000'
+    Technique: PUP
+    Severity: 2
+    EventUUID: '33333333333333333333333333333333'
+    OriginSourceIpAddress: ''
+    FalconHostLink: https://falcon.us-2.crowdstrike.com/activity/detections/detail/00000000000000000000000000000000/222222222222222222?
+    ExternalApiType: Event_DetectionSummaryEvent
+    DetectId: ldt:00000000000000000000000000000000:222222222222222222
+    PatternDispositionFlags: |-
+      {
+        "BlockingUnsupportedOrDisabled": false,
+        "BootupSafeguardEnabled": false,
+        "CriticalProcessDisabled": false,
+        "Detect": false,
+        "FsOperationBlocked": false,
+        "HandleOperationDowngraded": false,
+        "InddetMask": false,
+        "Indicator": false,
+        "KillActionFailed": false,
+        "KillParent": false,
+        "KillProcess": false,
+        "KillSubProcess": false,
+        "OperationBlocked": false,
+        "PolicyDisabled": false,
+        "ProcessBlocked": true,
+        "QuarantineFile": true,
+        "QuarantineMachine": false,
+        "RegistryOperationBlocked": false,
+        "Rooting": false,
+        "SensorOnly": false,
+        "SuspendParent": false,
+        "SuspendProcess": false
+      }
+    ProcessId: 377077835340488700
+    ProcessStartTime: '1695237011'
