@@ -11,3 +11,4 @@ dry_run=False
 ./exfiltrated-credentials/run_all.sh $region $bucket $path $dry_run
 ./okta-brute-force-to-crowdstrike/run_all.sh $region $bucket $path $dry_run
 ./mfa-disabled-for-active-user/run_all.sh $region $bucket $path $dry_run
+./okta-brute-force-data-exfiltration/run_all.sh $region $bucket $path $dry_run
