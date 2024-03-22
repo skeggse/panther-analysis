@@ -2,8 +2,8 @@
 
 
 region=${1:-us-east-1}
-bucket=${2:-sam-tester}
-path=${3:-dropbox-demo-2}
+bucket=${2:-sam-test-pre-alpha}
+path=${3:-correlation-rule/tester}
 dry_run=${4:-False}
 test_name=/grouping
 
