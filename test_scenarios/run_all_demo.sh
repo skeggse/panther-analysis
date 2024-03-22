@@ -5,7 +5,7 @@ region=us-east-1
 bucket=sam-test-pre-alpha
 # don't add trailing /
 path=correlation-rule/be-roast
-dry_run=${1:-False}
+dry_run=${1:-True}
 
 ./grouping/run_all.sh $region $bucket $path "$dry_run"
 ./exfiltrated-credentials/run_all.sh $region $bucket $path "$dry_run"
